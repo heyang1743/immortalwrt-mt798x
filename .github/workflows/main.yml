@@ -3,7 +3,6 @@ env:
   REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: .config
-  
   UPLOAD_BIN_DIR: True
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: false

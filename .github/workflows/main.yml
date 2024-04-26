@@ -67,17 +67,17 @@ jobs:
         ./scripts/feeds install -d y -p istore luci-app-store
 
     - name: Update feeds
-      run: cd immortalwrt-mt798x && ./scripts/feeds update -a
+      run:  ./scripts/feeds update -a
 
     - name: Install feeds
-      run:  cd immortalwrt-mt798x && ./scripts/feeds install -a
+      run:   ./scripts/feeds install -a
 
    
 
     - name: Download package
       id: package
       run: |
-        cd immortalwrt-mt798x
+        #cd immortalwrt-mt798x
         make defconfig
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
@@ -86,7 +86,7 @@ jobs:
     - name: Compile the firmware
       id: compile
       run: |
-        cd immortalwrt-mt798x
+        #cd immortalwrt-mt798x
         echo -e "$(nproc) thread compile"
         make -j$(nproc) || make -j1 || make -j1 V=s
         echo "status=success" >> $GITHUB_OUTPUT
@@ -109,7 +109,7 @@ jobs:
       id: organize
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
-        cd immortalwrt-mt798x/bin/targets/*/*
+        cd immortalwrt-mt798x/bin/targets/
         rm -rf packages
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "status=success" >> $GITHUB_OUTPUT
